@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3f68d1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 12px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2d52a1;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* ✅ MEDIA QUERIES para pantallas pequeñas */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
