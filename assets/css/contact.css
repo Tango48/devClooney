@@ -5,7 +5,10 @@
 body{
   height: 100%; 
   font-family: 'Noto Sans', sans-serif;
-  background-color: #2a5298; 
+  background-color: #fff;
+  /*background-image: url('/img/img-fondo2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;*/
 }
 
 
