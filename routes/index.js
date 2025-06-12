@@ -33,6 +33,7 @@ router.get('/menu', (req, res) => {
   res.render('menu', { mensaje });
 });
 router.get('/productos', (req, res) => res.render('productos'));
+router.get('/contact', (req, res) => res.render('contact'));
 
 // — Root (redirección opcional) —
 router.get('/', (req, res) => res.redirect('/login'));

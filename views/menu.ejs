@@ -55,7 +55,7 @@
 <nav>
   <a href="#" onclick="mostrarInicio()">Inicio</a>
   <a href="#" onclick="cargarEnIframe('/productos')">Productos</a>
-  <a href="#">Contacto</a>
+  <a href="#" onclick="cargarEnIframe('/contact')">Contacto</a>
   <a href="#">Iniciar Sesión</a>
 </nav>
 
@@ -64,13 +64,16 @@
     <h2>Vitrina de Productos</h2>
     <p>Bienvenido al menú principal.</p>
   </div>
-  <iframe id="iframe-productos" style="width:100%;height:80vh;border:none;display:none;"></iframe>
+  <!--<iframe id="iframe-productos" style="width:100%;height:80vh;border:none;display:none;"></iframe>
+  <iframe id="iframe-contact" style="width:100%;height:80vh;border:none;display:none;"></iframe>-->
+  <iframe id="iframe-contenido" style="display:none; width: 80%; height: 600px; border: none; margin: auto; display: block;"></iframe>
 </main>
 
 <script>
-  function cargarEnIframe(url) {
+  /**function cargarEnIframe(url) {
     document.getElementById('principal').style.display = 'none';
     const iframe = document.getElementById('iframe-productos');
+    const iframe2 = document.getElementById('iframe-contact');
     iframe.src = url;
     iframe.style.display = 'block';
   }
@@ -79,7 +82,21 @@
     document.getElementById('iframe-productos').style.display = 'none';
     document.getElementById('iframe-productos').src = '';
     document.getElementById('principal').style.display = 'block';
-  }
+  }*/
+
+ function cargarEnIframe(url) {
+    document.getElementById('principal').style.display = 'none';
+    const iframe = document.getElementById('iframe-contenido');
+    iframe.src = url;
+    iframe.style.display = 'block';
+}
+
+function mostrarInicio() {
+    const iframe = document.getElementById('iframe-contenido');
+    iframe.style.display = 'none';
+    iframe.src = '';
+    document.getElementById('principal').style.display = 'block';
+}
 </script>
 
 </body>
