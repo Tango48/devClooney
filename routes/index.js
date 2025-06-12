@@ -21,10 +21,12 @@ module.exports = router;
 const express        = require('express');
 const router         = express.Router();
 const authController = require('../controllers/authController');
+const sendMailController = require('../controllers/sendMailController');
 
 // — Autenticación —
 router.get('/login',  authController.loginForm);
 router.post('/login', authController.autenticar);
+
 
 // — Páginas post-login —
 router.get('/menu', (req, res) => {
@@ -34,7 +36,7 @@ router.get('/menu', (req, res) => {
 });
 router.get('/productos', (req, res) => res.render('productos'));
 router.get('/contact', (req, res) => res.render('contact'));
-
+router.post('/enviar-contacto', sendMailController);
 // — Root (redirección opcional) —
 router.get('/', (req, res) => res.redirect('/login'));
 
