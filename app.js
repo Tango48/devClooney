@@ -3,6 +3,7 @@ const express = require('express');
 const path    = require('path');
 const routes  = require('./routes/index');
 const db      = require('./config/db');
+const methodOverride = require('method-override');
 
 const app = express();
 const PORT = 3000;
@@ -19,7 +20,7 @@ app.use('/img', express.static(path.join(__dirname, 'assets/img')));
 // Body parsers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(methodOverride('_method'));
 
 
 const session = require('express-session');

@@ -1,3 +1,79 @@
+
+
+<!--<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos</title>
+  <link rel="stylesheet" href="/css/productos.css" />
+  <style>
+
+    .producto.formulario {
+      border: 2px dashed #007bff;
+      background: #f0f8ff;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    .producto.formulario input,
+    .producto.formulario textarea {
+      width: 100%;
+      margin: 5px 0 10px 0;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    .producto.formulario button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+      width: 100%;
+    }
+    .producto.formulario button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Nuestros Productos</h2>
+
+  <div class="productos">
+
+
+<form action="/productos/nuevo" method="POST" enctype="multipart/form-data" class="producto formulario">
+  <input type="text" name="nombre" placeholder="Nombre del producto" required />
+  <input type="text" name="descripcion" placeholder="Descripción" required />
+  <input type="number" name="precio" placeholder="Precio" required />
+  <input type="file" name="imagen" accept="image/*" required />
+  <button type="submit">Guardar Producto</button>
+</form>
+
+
+    <% if (productos.length > 0) { %>
+      <% productos.forEach(producto => { %>
+        <div class="producto">
+          <% if (producto.imagen) { %>
+  <img src="data:image/jpeg;base64,<%= Buffer.from(producto.imagen).toString('base64') %>" alt="<%= producto.nombre %>" />
+<% } else { %>
+  <img src="https://via.placeholder.com/150" alt="<%= producto.nombre %>" />
+<% } %>
+          <p>$<%= producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') %></p>
+          <button>Agregar al carrito</button>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p style="text-align: center;">No hay productos disponibles.</p>
+    <% } %>
+  </div>
+</body>
+</html>-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,28 +81,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Productos</title>
   <link rel="stylesheet" href="/css/productos.css" />
+  <style>
+    .producto.formulario {
+      border: 2px dashed #007bff;
+      background: #f0f8ff;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    .producto.formulario input,
+    .producto.formulario textarea {
+      width: 100%;
+      margin: 5px 0 10px 0;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    .producto.formulario button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+      width: 100%;
+    }
+    .producto.formulario button:hover {
+      background-color: #0056b3;
+    }
+    .eliminar-btn {
+      background-color: crimson;
+      color: white;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
   <h2 style="text-align: center;">Nuestros Productos</h2>
+
   <div class="productos">
-    <div class="producto">
-      <img src="https://via.placeholder.com/150" alt="Producto 1" />
-      <h3>Smart TV 50”</h3>
-      <p>$399.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-    <div class="producto">
-      <img src="https://via.placeholder.com/150" alt="Producto 2" />
-      <h3>Soporte de Pared</h3>
-      <p>$19.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-    <div class="producto">
-      <img src="https://via.placeholder.com/150" alt="Producto 3" />
-      <h3>Barra de Sonido</h3>
-      <p>$89.990</p>
-      <button>Agregar al carrito</button>
-    </div>
+
+    <!-- Formulario para agregar producto -->
+    <form action="/productos/nuevo" method="POST" enctype="multipart/form-data" class="producto formulario">
+      <input type="text" name="nombre" placeholder="Nombre del producto" required />
+      <input type="text" name="descripcion" placeholder="Descripción" required />
+      <input type="number" name="precio" placeholder="Precio" required />
+      <input type="file" name="imagen" accept="image/*" required />
+      <button type="submit">Guardar Producto</button>
+    </form>
+
+    <!-- Listado de productos -->
+    <% if (productos.length > 0) { %>
+      <% productos.forEach(producto => { %>
+        <div class="producto">
+          <% if (producto.imagen) { %>
+            <img src="data:image/jpeg;base64,<%= Buffer.from(producto.imagen).toString('base64') %>" alt="<%= producto.nombre %>" />
+          <% } else { %>
+            <img src="https://via.placeholder.com/150" alt="<%= producto.nombre %>" />
+          <% } %>
+
+          <h3><%= producto.nombre %></h3>
+          <p>$<%= producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') %></p>
+          <!--<button>Agregar al carrito</button>-->
+
+          <!-- Botón Eliminar -->
+          <form action="/productos/<%= producto.id %>?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
+            <button type="submit" class="eliminar-btn">Eliminar</button>
+          </form>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p style="text-align: center;">No hay productos disponibles.</p>
+    <% } %>
   </div>
 </body>
 </html>

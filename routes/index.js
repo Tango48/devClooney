@@ -22,6 +22,8 @@ const express        = require('express');
 const router         = express.Router();
 const authController = require('../controllers/authController');
 const sendMailController = require('../controllers/sendMailController');
+const productosController = require('../controllers/productosController');
+
 
 // — Autenticación —
 router.get('/login',  authController.loginForm);
@@ -34,7 +36,12 @@ router.get('/menu', (req, res) => {
   delete req.session.mensaje; // Para que no se muestre de nuevo al recargar
   res.render('menu', { mensaje });
 });
-router.get('/productos', (req, res) => res.render('productos'));
+router.get('/productos', productosController.getProductos);
+//router.post('/productos/nuevo', productosController.guardarProducto);
+router.post('/productos/nuevo',productosController.upload,productosController.guardarProducto);
+router.delete('/productos/:id', productosController.eliminarProducto);
+
+
 router.get('/contact', (req, res) => res.render('contact'));
 router.post('/enviar-contacto', sendMailController);
 // — Root (redirección opcional) —
