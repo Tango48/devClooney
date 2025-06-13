@@ -40,6 +40,8 @@ router.get('/productos', productosController.getProductos);
 //router.post('/productos/nuevo', productosController.guardarProducto);
 router.post('/productos/nuevo',productosController.upload,productosController.guardarProducto);
 router.delete('/productos/:id', productosController.eliminarProducto);
+router.get('/productos/:id/editar', productosController.editarProducto); // NUEVA RUTA
+router.put('/productos/:id', productosController.actualizarProducto);    // ACTUALIZACIÓN
 
 
 router.get('/contact', (req, res) => res.render('contact'));

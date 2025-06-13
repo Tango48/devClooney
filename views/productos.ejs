@@ -149,12 +149,17 @@
           <!-- Botón Eliminar -->
           <form action="/productos/<%= producto.id %>?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
             <button type="submit" class="eliminar-btn">Eliminar</button>
+            <a href="/productos/<%= producto.id %>/editar">
+            <button type="button">Editar</button>
+            </a>
           </form>
         </div>
       <% }) %>
     <% } else { %>
       <p style="text-align: center;">No hay productos disponibles.</p>
     <% } %>
+
+
   </div>
 </body>
 </html>

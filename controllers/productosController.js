@@ -53,3 +53,40 @@ exports.eliminarProducto = (req, res) => {
     res.redirect('/productos');
   });
 };
+
+
+
+// Mostrar formulario con datos actuales
+exports.editarProducto = (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM productos WHERE id = ?', [id], (err, result) => {
+    if (err) throw err;
+    if (result.length === 0) return res.send('Producto no encontrado');
+    res.render('editarProducto', { producto: result[0] });
+  });
+};
+
+exports.actualizarProducto = [
+  upload.single('imagen'),
+  (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion, precio } = req.body;
+    const imagen = req.file ? req.file.buffer : null;
+
+    let sql = '';
+    let valores = [];
+
+    if (imagen) {
+      sql = `UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, imagen = ? WHERE id = ?`;
+      valores = [nombre, descripcion, precio, imagen, id];
+    } else {
+      sql = `UPDATE productos SET nombre = ?, descripcion = ?, precio = ? WHERE id = ?`;
+      valores = [nombre, descripcion, precio, id];
+    }
+
+    db.query(sql, valores, (err) => {
+      if (err) throw err;
+      res.redirect('/productos');
+    });
+  }
+];

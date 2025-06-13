@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Producto</title>
+  <link rel="stylesheet" href="/css/productos.css" />
+</head>
+<body>
+  <h2 style="text-align: center;">Editar Producto</h2>
+  <div class="productos">
+    <form action="/productos/<%= producto.id %>?_method=PUT" method="POST"  enctype="multipart/form-data" class="producto formulario">
+      <input type="text" name="nombre" value="<%= producto.nombre %>" required />
+      <input type="text" name="descripcion" value="<%= producto.descripcion %>" required />
+      <input type="number" name="precio" value="<%= producto.precio %>" required />
+       <input type="file" name="imagen" accept="image/*" />
+      <button type="submit">Actualizar</button>
+    </form>
+  </div>
+</body>
+</html>
