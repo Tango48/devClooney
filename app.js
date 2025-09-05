@@ -24,7 +24,7 @@ app.use(express.json());
 
 const session = require('express-session');
 app.use(session({
-  secret: 'mi_secreto',
+  secret: 'mi_secreto_2',
   resave: false,
   saveUninitialized: true
 }));
